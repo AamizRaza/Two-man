@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Gemini - Thai Consonant Drill</title>
+    <title>Two-Man - Thai Consonant Drill</title>
     <style>
         :root {
             --primary: #4a90e2;
@@ -49,6 +49,8 @@
         .team-name {
             font-weight: bold;
             color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .hearts {
@@ -142,7 +144,7 @@
 
 <div class="app-container">
     <div class="header">
-        <div class="team-name">TEAM GEMINI</div>
+        <div class="team-name">Two-Man</div>
         <div class="hearts" id="heartsDisplay">❤❤❤</div>
     </div>
 
@@ -178,7 +180,6 @@
 
 <script>
     // Data: The 44 Thai Consonants
-    // Note on pronunciation: I have included the "Gor" (or) sound explicitly as requested.
     const consonants = [
         { char: 'ก', name: 'Gor Gai', mean: 'Chicken' },
         { char: 'ข', name: 'Khor Khai', mean: 'Egg' },
