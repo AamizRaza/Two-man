@@ -145,7 +145,10 @@
 <div class="app-container">
     <div class="header">
         <div class="team-name">Two-Man</div>
-        <div class="hearts" id="heartsDisplay">❤❤❤</div>
+        <div style="display:flex; gap:12px; align-items:center;">
+            <div class="hearts" id="heartsDisplay">❤❤❤</div>
+            <div id="remainingDisplay" style="font-size:0.95rem; color:#666;">Consonants left: 44</div>
+        </div>
     </div>
 
     <div id="startScreen" class="screen active">
@@ -231,6 +234,7 @@
     let hearts = 3;
     let score = 0;
     let currentItem = null;
+    let remainingConsonants = [];
 
     // DOM Elements
     const heartsDisplay = document.getElementById('heartsDisplay');
@@ -246,8 +250,17 @@
         hearts = 3;
         score = 0;
         updateHearts();
+        // Initialize remaining consonants (do not repeat questions)
+        remainingConsonants = consonants.slice();
+        updateRemaining();
         showScreen(gameScreen);
         generateQuestion();
+    }
+
+    function updateRemaining() {
+        const el = document.getElementById('remainingDisplay');
+        if (!el) return;
+        el.textContent = `Consonants left: ${remainingConsonants.length}`;
     }
 
     function showScreen(screen) {
@@ -265,9 +278,16 @@
     }
 
     function generateQuestion() {
-        // Pick random consonant
-        const randomIndex = Math.floor(Math.random() * consonants.length);
-        currentItem = consonants[randomIndex];
+        // If none left, finish the drill
+        if (remainingConsonants.length === 0) {
+            endGame();
+            return;
+        }
+
+        // Pick random consonant from remaining and remove it so it's not asked again
+        const randomIndex = Math.floor(Math.random() * remainingConsonants.length);
+        currentItem = remainingConsonants.splice(randomIndex, 1)[0];
+        updateRemaining();
         
         // Display Character
         questionChar.textContent = currentItem.char;
