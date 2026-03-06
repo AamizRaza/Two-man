@@ -251,10 +251,28 @@
     const questionChar = document.getElementById('questionChar');
     const optionsContainer = document.getElementById('optionsContainer');
 
-    function startGame() {
+    async function startGame() {
         // capture nickname (or default)
         const input = document.getElementById('nicknameInput');
         nickname = input && input.value.trim() ? input.value.trim() : 'Player';
+
+        // ask backend to increment streak
+        let streak = 0;
+        try {
+            const resp = await fetch('/streak', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nickname })
+            });
+            if (resp.ok) {
+                const data = await resp.json();
+                streak = data.streak;
+            } else {
+                console.error('Failed to update streak', resp.statusText);
+            }
+        } catch (err) {
+            console.error('Error contacting streak service', err);
+        }
 
         hearts = 3;
         score = 0;
@@ -263,9 +281,9 @@
         remainingConsonants = consonants.slice();
         updateRemaining();
 
-        // show nickname on game screen
+        // show nickname and streak on game screen
         const nickEl = document.getElementById('nicknameDisplay');
-        if (nickEl) nickEl.textContent = `Nickname: ${nickname}`;
+        if (nickEl) nickEl.textContent = `Nickname: ${nickname} (Streak: ${streak})`;
 
         showScreen(gameScreen);
         generateQuestion();
