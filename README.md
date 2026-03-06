@@ -16,7 +16,7 @@ This is a simple quiz application for learning Thai consonants. It now includes 
 ### Setup
 1. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 2. Configure the database connection via the `DATABASE_URL` environment variable. Default points to
    `postgresql://postgres:password@localhost:5432/twoman`.
