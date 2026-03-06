@@ -155,10 +155,14 @@
         <h1>Thai Drill</h1>
         <p>Master the 44 consonants.<br>You have 3 hearts.</p>
         <div style="font-size: 5rem; margin-bottom: 30px;">ก</div>
+        <!-- Nickname input added -->
+        <input type="text" id="nicknameInput" placeholder="Enter your nickname" style="padding:10px; width:80%; margin-bottom:20px; border-radius:8px; border:1px solid #ccc; font-size:1rem;" />
         <button onclick="startGame()">Start Drill</button>
     </div>
 
     <div id="gameScreen" class="screen">
+        <!-- Display nickname when game starts -->
+        <div id="nicknameDisplay" style="font-size:1.2rem; font-weight:bold; margin-bottom:20px; color:var(--primary);"></div>
         <div class="question-card" id="questionChar">ก</div>
         <div class="options-grid" id="optionsContainer">
             </div>
@@ -235,6 +239,7 @@
     let score = 0;
     let currentItem = null;
     let remainingConsonants = [];
+    let nickname = ''; // user-chosen name
 
     // DOM Elements
     const heartsDisplay = document.getElementById('heartsDisplay');
@@ -247,12 +252,21 @@
     const optionsContainer = document.getElementById('optionsContainer');
 
     function startGame() {
+        // capture nickname (or default)
+        const input = document.getElementById('nicknameInput');
+        nickname = input && input.value.trim() ? input.value.trim() : 'Player';
+
         hearts = 3;
         score = 0;
         updateHearts();
         // Initialize remaining consonants (do not repeat questions)
         remainingConsonants = consonants.slice();
         updateRemaining();
+
+        // show nickname on game screen
+        const nickEl = document.getElementById('nicknameDisplay');
+        if (nickEl) nickEl.textContent = `Nickname: ${nickname}`;
+
         showScreen(gameScreen);
         generateQuestion();
     }
