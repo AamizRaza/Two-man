@@ -16,7 +16,7 @@ This is a simple quiz application for learning Thai consonants. It now includes 
 ### Setup
 1. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install fastapi uvicorn sqlalchemy psycopg2-binary pydantic
    ```
 2. Configure the database connection via the `DATABASE_URL` environment variable. Default points to
    `postgresql://postgres:password@localhost:5432/twoman`.
@@ -24,8 +24,6 @@ This is a simple quiz application for learning Thai consonants. It now includes 
    ```bash
    uvicorn backend.app:app --reload
    ```
-
-> ⚠️ `requirements.txt` purposely omits explicit version numbers so the latest compatible releases are installed.
 
 ## Notes
 - The backend will automatically create the `users` table if it does not exist.
