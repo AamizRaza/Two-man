@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from .database import SessionLocal, engine
+from database import SessionLocal, engine
 from . import models
 
 # create tables if they don't exist
