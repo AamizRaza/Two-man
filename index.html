@@ -259,7 +259,7 @@
         // ask backend to increment streak
         let streak = 0;
         try {
-            const resp = await fetch('/streak', {
+            const resp = await fetch('https://Two-man-service.onrender.com/streak', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nickname })
